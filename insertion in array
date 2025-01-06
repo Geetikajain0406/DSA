@@ -1,0 +1,19 @@
+#include<stdio.h>
+int main (){
+    int arr[5]={1,2,3,4,5};
+    int num,poss;
+   int size=5;
+    printf("enter element");
+    scanf("%d" ,&num);
+    printf("tell the position");
+    scanf("%d" ,&poss);
+    for(int i=4;i>=poss-1;i--){
+       arr[i+1] = arr[i];
+    }
+    arr[poss-1]=num;
+    size++;
+    for(int i =0;i<size;i++){
+        printf("%d",arr[i]);
+    }
+    return 0;
+}
