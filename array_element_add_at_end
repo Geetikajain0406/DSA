@@ -1,0 +1,22 @@
+#include<stdio.h>
+int add_at_end(int arr[],int freposs,int data){
+    arr[freposs]=data;
+    freposs++;
+   return freposs; 
+}
+int main (){
+    int arr[10],n,freposs;
+    printf("enter no of elements");
+    scanf("%d",&n);
+    printf("tell the elements of array");
+    for(int i=0;i<n;i++){
+        scanf("%d",&arr[i]);
+    }
+    freposs =n;
+   freposs= add_at_end(arr,freposs,66);
+    printf(" the elements of array");
+    for(int i=0;i<freposs;i++){
+        printf("%d\n",arr[i]);
+    }
+   return 0; 
+}
