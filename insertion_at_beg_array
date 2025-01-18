@@ -1,0 +1,30 @@
+#include<stdio.h>
+
+void add_beg(int arr[],int n,int data){
+    for(int i=n-1;i>=0;i--){
+       arr[i+1] = arr[i];
+      
+        
+    }
+     arr[0]=data;
+   
+}
+
+int main (){
+    int arr[10]; 
+    int n,data=10;
+    printf("enter elements");
+    scanf("%d",&n);
+    printf("enter elements for array");
+    for(int i=0;i<n;i++){
+       scanf("%d",&arr[i]);
+    }
+   add_beg(arr,n,data);
+for(int i=0;i<n+1;i++){
+ 
+     printf("%d\n",arr[i]);
+}
+
+
+   return 0; 
+}
