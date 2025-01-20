@@ -1,0 +1,23 @@
+#include <stdio.h>
+void max_element(int x[],int len)
+{
+int i;
+for(i=0;i<len;i++)
+
+
+
+{
+if(x[0]<x[i])
+{
+x[0] = x[i];
+}
+}
+printf("%d", x[0]);
+}
+int main ()
+{
+int nums[]={751,842,654,671,693,757,794,982,913};
+int i,l=sizeof(nums)/sizeof(int);
+max_element(nums,l);
+return 0;
+}
