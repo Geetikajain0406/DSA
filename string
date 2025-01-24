@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<ctype.h>
+void countvowelsandconst(const char *str){
+    int countvow=0 ,countconst=0;
+    for(int i=0;str[i]!='\0';i++){
+        char ch = tolower(str[i]);
+        if (isalpha(ch)){
+    if(ch=='a'||ch=='e'||ch=='i'||ch=='o'||ch=='u'){
+        countvow++;
+        
+    }
+    else {
+        countconst++;
+    }
+        }
+    }
+    printf("the vowels are %d, and constants are %d",countvow,countconst);
+}
+int main() {
+    char str[6]="hello";
+   
+    int n = strlen(str);
+  countvowelsandconst(str);
+  
+    return 0;
+}
