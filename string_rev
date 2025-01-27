@@ -1,0 +1,27 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+int main (){
+    int n;
+    printf("how much string size\n");
+    scanf("%d",&n);
+    char string[n +1];
+    printf("write string");
+    getchar();
+    scanf("%s",&string);
+    char * ptr = malloc((n+1) * sizeof(char));
+    if (ptr == NULL) {
+        printf("Memory allocation failed.\n");
+        return 1;
+    }
+int length = strlen(string);
+    for(int i =0;i<length;i++){
+       ptr[i]= string[length-i-1];
+    }
+ptr[length]='\0';
+   
+        printf("%s",ptr);
+    
+    free(ptr);
+    return 0;
+}
