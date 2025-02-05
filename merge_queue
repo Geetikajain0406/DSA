@@ -1,0 +1,29 @@
+#include<stdio.h>
+int queue[5]={1,2,3,4,5};
+int queue2[5]={6,7,8,9,10};
+int rear=4,front=0;
+void mergequeue(){
+    if(front==-1){
+        printf("no element");
+    }
+else{
+    int merge[10];
+    int temprear=-1,tempfront=-1;
+    for(int i=front;i<=rear;i++){
+        merge[++temprear]=queue[i];
+    }
+   for(int i=front;i<=rear;i++){
+   merge[++temprear]=queue2[i];
+   }
+   tempfront=0;
+   for(int i=tempfront;i<=temprear;i++){
+       printf("%d",merge[i]);
+   }
+
+}
+    
+}
+int main(){
+    mergequeue();
+    return 0;
+}
