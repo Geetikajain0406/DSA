@@ -1,0 +1,62 @@
+#include <stdio.h>
+int n=5;
+int queue[5];
+int front =-1,rear=-1;
+void enqueue(int n){
+    if(front==-1&&rear==-1){
+        front=rear=0;
+        queue[rear]=n;
+    }
+    else if(((rear+1)%n)==front){
+        printf("queue overflow");
+    }
+else{
+    rear=((rear+1)%n);
+    queue[rear]=n;
+} }
+    void dequeue(){
+        if(rear==-1&&front==-1){
+            printf("underflow");
+        }
+        else if(rear==front){
+            rear=front=-1;
+            
+        }
+    else{
+        printf("the dequeue element is %d",queue[front]);
+        front=(front+1)%n;
+    }
+    }
+void display(){
+     if(rear==-1&&front==-1){
+            printf("underflow");
+        }
+        else{
+            int i=front;
+            printf("the queue is \n");
+            while(i!=rear){
+                printf("%d",queue[i]);
+                i=(i+1)%n;
+            }
+            printf("%d",queue[rear]);
+        }
+}
+void peek(){
+     if(rear==-1&&front==-1){
+            printf("underflow");
+        }
+        else{
+            printf("%d",queue[front]);
+        }
+}
+int main() {
+    enqueue(2);
+     enqueue(3);
+      enqueue(4);
+       enqueue(5);
+       display();
+       dequeue();
+       display();
+       peek();
+    return 0;
+}
