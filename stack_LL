@@ -1,0 +1,59 @@
+#include <stdio.h>
+#include<stdlib.h>
+struct node {
+    int data;
+    struct node *link;
+};
+struct node*top=0;
+   void push(int x){
+      struct node * newnode;
+      newnode=malloc(sizeof(struct node));
+      newnode->data=x;
+      newnode->link=top;
+      top=newnode;
+   
+   }
+   void display(){
+       if(top==0){
+           printf("no element");
+       }
+       else {
+           struct node*temp;
+           temp=top;
+           while(temp!=0){
+               printf("the data is %d \n",temp->data);
+               temp=temp->link;
+           }
+       }
+   }
+   void peek(){
+       if(top==0){
+           printf("no element");
+       }
+       else {
+           printf("the peek element is %d \n",top->data);
+       }
+   }
+   void pop(){
+       if(top==0){
+           printf("no element");
+       }
+       else {
+           struct node *temp=top;
+           printf("the pop element is %d \n",temp->data);
+           top=top->link;
+           free(temp);
+       }
+   }
+int main() {
+  push(4);
+  push(8);
+  push(9);
+  push(7);
+  display();
+  pop();
+  display();
+  peek();
+
+    return 0;
+}
