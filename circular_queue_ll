@@ -1,0 +1,78 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node {
+    int data;
+    struct node *link;
+};
+    struct node*front=0;
+    struct node *rear=0;
+    void enqueue(int x){
+        struct node *newnode;
+        newnode = malloc(sizeof(struct node));
+        newnode->data=x;
+        newnode->link=NULL;
+        if(rear==NULL){
+            rear=front=newnode;
+            rear->link=front;
+        }
+        else{
+            rear->link=newnode;
+            rear=newnode;
+            rear->link=front;
+        }
+    }
+    void dequeue()
+    {
+        
+       if (front == NULL && rear == NULL){
+            printf("the queue is empty");
+        }
+        struct node *temp = front;
+    printf("Dequeued: %d\n", front->data);
+         if(rear==front){
+            rear=front=NULL;
+            free(temp);
+        }
+        else{
+            printf("the data is %d \n",front->data);
+        front=front->link;
+      rear->link=front; 
+       
+       
+        }
+         free(temp);
+    }
+    void display(){
+        struct node*temp=front;
+        if(rear==NULL&&front==NULL){
+            printf("the queue is empty\n");
+        }
+        else{
+            
+            while(temp->link!=front){
+                printf("the data is %d \n",temp->data);
+                temp=temp->link;
+            }
+            printf(" the data is %d \n",rear->data);
+        }
+    }
+    void peek(){
+        if(rear==NULL&&front==NULL){
+            printf("the queue is empty \n");
+        }
+        else{
+        printf("the data to peek is %d \n",front->data);
+    }
+    }
+    int main(){
+        enqueue(2);
+        enqueue(6);
+        enqueue(3);
+        enqueue(8);
+     enqueue(4);
+      
+       
+        dequeue();
+        display();
+        return 0;
+    }
