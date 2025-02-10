@@ -1,0 +1,21 @@
+#include <stdio.h>
+
+int main() {
+    int stack[80];
+    int top=0;
+    int n=10;
+    while(n!=1){
+        top++;
+        stack[top]=n%2;
+        n=n/2;
+    }
+top++;
+stack[top]=n;
+//to print stack now
+int i=top;
+while(i!=0){
+    printf("%d ",stack[i]);
+    i--;
+}
+    return 0;
+}
