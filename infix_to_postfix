@@ -1,0 +1,37 @@
+Given infix expression:
+A + B * (C - D) ^ E
+
+Operator precedence:
+Parentheses () – Highest precedence
+Exponentiation ^ – Right to left associativity
+Multiplication and Division *, / – Left to right associativity
+Addition and Subtraction +, - – Left to right associativity
+Step-by-step conversion:
+(C - D) → C D -
+(C - D) ^ E → C D - E ^
+B * (C - D) ^ E → B C D - E ^ *
+A + B * (C - D) ^ E → A B C D - E ^ * +
+Final Postfix Expression:
+A B C D - E ^ * +
+
+Q2)To convert the given infix expression into postfix notation, we follow operator precedence and associativity rules:  
+
+### Given infix expression:  
+**A * (B + D) / E - F * (G + H / K)**  
+
+### Operator precedence:  
+1. **Parentheses** `()` – Highest precedence  
+2. **Exponentiation** `^` – Right to left associativity  
+3. **Multiplication and Division** `*, /` – Left to right associativity  
+4. **Addition and Subtraction** `+, -` – Left to right associativity  
+
+### Step-by-step conversion:  
+1. `(B + D)` → `B D +`  
+2. `A * (B + D)` → `A B D + *`  
+3. `A * (B + D) / E` → `A B D + * E /`  
+4. `(G + H / K)` → `H K / G +`  
+5. `F * (G + H / K)` → `F H K / G + *`  
+6. `A * (B + D) / E - F * (G + H / K)` → `A B D + * E / F H K / G + * -`  
+
+### Final Postfix Expression:  
+**A B D + * E / F H K / G + * -**
