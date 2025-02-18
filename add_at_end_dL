@@ -1,0 +1,69 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+    int data;
+    struct node * prev;
+    struct node * next;
+};
+struct node* add_to_empty(struct node* head,int data){
+    struct node*newnode=malloc(sizeof(struct node ));
+    newnode->next=NULL;
+    newnode->prev=NULL;
+    newnode->data=data;
+    head=newnode;
+    return head;
+}
+struct node * add_at_beg(struct node * head,int data){
+    struct node * temp=malloc(sizeof(struct node ));
+    temp->prev=NULL;
+    temp->data=data;
+    temp->next=NULL;
+    
+    temp->next=head;
+     if (head != NULL) { 
+        head->prev = temp;
+    }
+  
+   head=temp;
+    return head;
+}
+struct node * add_at_end(struct node * head,int data){
+    struct node*temp,*tp;
+    temp= malloc(sizeof(struct node));
+    temp->next=NULL;
+    temp->prev=NULL;
+    temp->data=data;
+     if (head == NULL) {
+        return temp; // If list is empty, return the new node as head
+    }
+    tp=head;
+    while(tp->next!=NULL){
+        tp=tp->next;
+        
+    }
+    tp->next=temp;
+        temp->prev=tp;
+    
+    return head;
+}
+void print_list(struct node* head) {
+    struct node* temp = head;
+    printf("Doubly Linked List: ");
+    while (temp != NULL) {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    }
+    printf("\n");
+}
+    
+int main(){
+    struct node *head;
+    head=malloc(sizeof(struct node));
+   head=add_to_empty(head,45);
+    head=add_at_beg(head,45);
+   head=add_at_beg(head,50);
+   head=add_at_end(head,30);
+    print_list(head);
+    
+  return 0;  
+}
