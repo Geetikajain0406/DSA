@@ -1,0 +1,36 @@
+struct node * reverse(struct node * head){
+    struct node*ptr1=head;
+    struct node*ptr2=ptr1->next;
+    ptr1->next=NULL;
+    ptr1->prev=ptr2;
+    while(ptr2 != NULL){
+        ptr2->prev=ptr2->next;
+        ptr2->next=ptr1;
+        ptr1=ptr2;
+        ptr2=ptr2->prev;
+        
+    }
+    head=ptr1;
+    return head;
+}
+int main(){
+    struct node *head;
+    head=malloc(sizeof(struct node));
+   head=add_to_empty(head,45);
+    head=add_at_beg(head,45);
+   head=add_at_beg(head,50);
+   head=add_at_end(head,30);
+   head=add_at_poss(head,2,20); 
+    print_list(head);
+     head=reverse(head);
+    print_list(head);
+   head=del_first(head);
+     print_list(head);
+   head=del_last(head);
+    print_list(head);
+    head=del_intermediate(head,2);
+    print_list(head);
+   
+    
+  return 0;  
+}
