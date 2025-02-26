@@ -1,0 +1,103 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+    int data;
+    struct node *link;
+    
+};
+struct node* add_empty(int data){
+    struct node*temp=malloc(sizeof(struct node));
+    
+    temp->data=data;
+  temp->link=temp;
+  return temp;
+}
+struct node*add_beg(struct node *head,int data){
+    struct node*temp=malloc(sizeof(struct node));
+    temp->data=data;
+    if (head == NULL) {
+        temp->link = temp;
+        return temp;
+    }
+   
+    struct node*t;
+    t=head;
+    while(t->link!=head){
+        t=t->link;
+    }
+    
+    t->link=temp;
+    temp->link=head;
+    
+    return temp;
+    
+}
+void print(struct node*head){
+    struct node*temp=head;
+    printf("the circular single linked list\n");
+    if(temp!= NULL){
+    printf("%d ",temp->data);
+    temp=temp->link;
+    while(temp!=head){
+        printf("-> %d ",temp->data);
+        temp=temp->link;
+    }
+    }
+}
+struct node*add_end(struct node *head,int data){
+    struct node*temp=malloc(sizeof(struct node));
+    temp->data=data;
+    temp->link=NULL;
+    if(head==NULL){
+        temp->link=temp;
+        return temp;
+    }
+    struct node *t=head;
+    while(t->link!=head){
+        t=t->link;
+    }
+   t->link=temp;
+   temp->link=head;
+    return head;
+}
+struct node * add_poss(struct node *head,int data,int poss){
+    struct node *temp=malloc(sizeof(struct node));
+    temp->data=data;
+    temp->link=NULL;
+    if(poss==1){
+        head=add_beg(head,data);
+        return head;
+    }
+    struct node *t=head;
+    
+    while(poss>2 && t->link != head){
+        t=t->link;
+        poss--;
+    }
+    if(t->link==head){
+        head=add_end(head,data);
+        return head;
+    }
+    
+       temp->link= t->link;
+        t->link=temp;
+        
+    
+    return head;
+}
+int main(){
+    struct node*head;
+    head=add_empty(400);
+    head=add_beg(head,300);
+    head=add_beg(head,100);
+    print(head);
+    head=add_end(head,500);
+    print(head);
+    head=add_poss(head,200,2);
+     print(head);
+    
+    
+    
+    
+    return 0;
+}
