@@ -1,0 +1,126 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node {
+    int data;
+    struct node *prev;
+    struct node *next;
+};
+struct node* add_empty(struct node *head, int data) {
+    struct node *temp = malloc(sizeof(struct node));
+    if (head == NULL) {
+        printf("Memory allocation failed\n");
+        return NULL;
+    }
+    temp->data = data;
+    temp->prev = temp;
+    temp->next = temp;
+    return temp;
+}
+struct node *add_beg(struct node *head, int data) {
+    struct node *temp =malloc(sizeof(struct node));
+    if (temp == NULL) {
+        printf("Memory allocation failed\n");
+        return head;
+    }
+    
+if (head == NULL) {
+        return add_empty(head, data);
+    }
+
+    struct node *t = head->prev;
+temp->data = data;
+    temp->next = head;
+    temp->prev = t;
+    t->next = temp;
+    head->prev = temp;
+
+    return temp;
+}
+struct node* add_end(struct node *head, int data) {
+    struct node *temp =malloc(sizeof(struct node));
+    if (temp == NULL) {
+        printf("Memory allocation failed\n");
+        return head;
+    }
+   if (head == NULL) {
+        return add_empty(head, data);
+    }
+
+    struct node *t = head->prev;
+ temp->data = data;
+    temp->next = head;
+    temp->prev = t;
+    t->next = temp;
+    head->prev = temp;
+
+    return head;
+}
+struct node *add_poss(struct node *head, int data, int poss) {
+    if (head == NULL) {
+        head = add_empty(head, data);
+        return head;
+    }
+
+    if (poss == 1) {
+        head = add_beg(head, data);
+        return head;
+    }
+
+    struct node *temp = malloc(sizeof(struct node));
+    if (temp == NULL) {
+        printf("Memory allocation failed\n");
+        return head;
+    }
+   struct node *t = head;
+    while (poss>2 && t->next != head) {
+        t = t->next;
+       poss--;
+    }
+
+    if (t->next == head) {
+        head = add_end(head, data);
+        return head;
+    }
+  temp->data = data;
+    temp->next = t->next;
+    temp->prev = t;
+    t->next->prev = temp;
+    t->next = temp;
+
+    return head;
+}
+
+void print(struct node *head) {
+    if (head == NULL) {
+        printf("List is empty\n");
+        return;
+    }
+
+    struct node *temp = head;
+    printf("Circular Doubly Linked List: \n");
+    
+    while (1) {
+        printf(" -> %d ", temp->data);
+        temp = temp->next;
+        if (temp == head)
+            break;
+    }
+    printf("\n");
+}
+
+int main() {
+    struct node *head =malloc(sizeof(struct node));
+
+    head = add_empty(head, 10);
+     print(head);
+    head = add_beg(head, 20);
+     print(head);
+    head = add_end(head, 30);
+     print(head);
+    head = add_poss(head, 40,3);
+ print(head);
+   
+
+    return 0;
+}
