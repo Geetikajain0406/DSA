@@ -1,0 +1,37 @@
+struct node *add_mid(struct node *head,int data){
+    struct node*temp,*t;
+    temp=malloc(sizeof(struct node));
+    temp->data=data;
+    t=head;
+    int count=1;
+    while(t!=NULL){
+        t=t->link;
+        count++;
+    }
+    int mid=count/2;
+     return add_poss(head, data, mid );
+}
+void print(struct node * head){
+    struct node*temp=head;
+    printf("the linked list is\n");
+    while(temp!=NULL){
+        printf("->%d \n",temp->data);
+        temp=temp->link;
+    }
+}
+
+int main() {
+     struct node*head;
+  head=malloc(sizeof(struct node));
+  head->data=200;
+  head->link=NULL;
+  head=add_beg(head,100);
+  print(head);
+head=add_end(head,500);
+print(head);
+head=add_poss(head,400,2);
+print(head);
+head=add_mid(head,300);
+print(head);
+    return 0;
+}
