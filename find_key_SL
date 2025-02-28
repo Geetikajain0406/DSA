@@ -1,0 +1,20 @@
+void find_key(struct node*head,int n){
+    struct node *temp=head;
+    int poss=1;
+    int found =0;
+    while(temp!=NULL){
+        if(n==temp->data){
+            
+            printf("the data is there %d",poss);
+            found=1;
+            }
+            poss++;
+             temp=temp->link;
+    }
+             if (!found){
+                 printf("Key not found, adding at the end.\n");
+                 add_at_end(head,n);
+             }
+       
+        
+    }
