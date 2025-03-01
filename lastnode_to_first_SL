@@ -1,0 +1,13 @@
+struct node *change(struct node *head){
+    struct node *t=head;
+    struct node*prev=NULL;
+    while(t->link!=NULL){
+        prev=t;
+        t=t->link;
+    }
+     prev->link=NULL;
+     t->link=head;
+     head=t;
+   return head;
+    
+}
