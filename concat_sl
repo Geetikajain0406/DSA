@@ -1,0 +1,54 @@
+struct node*concat(struct node*head,struct node*head2){
+    struct node*t1=head;
+    struct node *t2=head2;
+    while(t1->link!=head){
+        t1=t1->link;
+    }
+    while(t2->link!=head2){
+        t2=t2->link;
+    }
+    if (head == NULL) return head2;
+if (head2 == NULL) return head;
+ t1->link=head2;
+ t2->link=head;
+   
+    
+   return head;
+}
+void printList(struct node* head) {
+    if (head == NULL) {
+        printf("List is empty\n");
+        return;
+    }
+
+    struct node* temp = head;
+    printf("Circular Linked List: ");
+    do {
+        printf("%d -> ", temp->data);
+        temp = temp->link;
+    } while (temp != head);
+    printf("(back to head)\n");
+}
+int main(){
+    struct node*head=NULL;
+    struct node*head2=NULL;
+    head=add_empty(head,400);
+    head=add_beg(head,300);
+    head=add_beg(head,100);
+    head=add_end(head,500);
+    head=add_poss(head,200,2);
+     print(head);
+     
+     
+     head2=add_empty2(head2,900);
+    head2=add_beg2(head2,800);
+    head2=add_beg2(head2,600);
+head2=add_end2(head2,1000);
+  head2=add_poss2(head2,700,2);
+     print2(head2);
+     head=concat(head,head2);
+    printList(head);
+    return 0;
+    
+}
+    
