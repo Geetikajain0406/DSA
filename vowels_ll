@@ -1,0 +1,85 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Structure for a linked list node
+typedef struct Node {
+    char data;
+    struct Node* next;
+} Node;
+
+// Function to insert a character at the end of the linked list
+void insert(Node** head, char ch) {
+    Node* newNode = (Node*)malloc(sizeof(Node));
+    newNode->data = ch;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+        return;
+    }
+
+    Node* temp = *head;
+    while (temp->next) {
+        temp = temp->next;
+    }
+    temp->next = newNode;
+}
+
+// Function to print the linked list
+void printList(Node* head) {
+    while (head) {
+        printf("%c -> ", head->data);
+        head = head->next;
+    }
+    printf("NULL\n");
+}
+
+// Function to check if a character is a vowel
+int isVowel(char ch) {
+    return (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u' ||
+            ch == 'A' || ch == 'E' || ch == 'I' || ch == 'O' || ch == 'U');
+}
+
+// Function to remove vowels from the linked list
+void removeVowels(Node** head) {
+    while (*head && isVowel((*head)->data)) { // Remove vowels from the beginning
+        Node* temp = *head;
+        *head = (*head)->next;
+        free(temp);
+    }
+
+    Node* current = *head;
+    while (current && current->next) {
+        if (isVowel(current->next->data)) {
+            Node* temp = current->next;
+            current->next = temp->next; // Skip the vowel node
+            free(temp);
+        } else {
+            current = current->next;
+        }
+    }
+}
+
+// Main function
+int main() {
+    Node* head = NULL;
+    char name[100];
+
+    printf("Enter a name: ");
+    scanf("%s", name); // Read the name
+
+    // Insert characters into the linked list
+    for (int i = 0; name[i] != '\0'; i++) {
+        insert(&head, name[i]);
+    }
+
+    printf("Original Linked List: ");
+    printList(head);
+
+    removeVowels(&head);
+
+    printf("Linked List after removing vowels: ");
+    printList(head);
+
+    return 0;
+}
