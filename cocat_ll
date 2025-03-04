@@ -1,0 +1,95 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Structure for a node
+typedef struct Node {
+    int data;
+    struct Node* next;
+} Node;
+
+// Function to insert a node at the end of a circular linked list
+void insert(Node** head, int data) {
+    Node* newNode = (Node*)malloc(sizeof(Node));
+    newNode->data = data;
+    newNode->next = *head; // Pointing to head for circular nature
+
+    if (*head == NULL) {
+        *head = newNode;
+        newNode->next = *head; // Circular link
+        return;
+    }
+
+    Node* temp = *head;
+    while (temp->next != *head) {
+        temp = temp->next;
+    }
+    temp->next = newNode; // Connect last node to new node
+}
+
+// Function to print a circular linked list
+void printList(Node* head) {
+    if (!head) return; // Empty list
+
+    Node* temp = head;
+    do {
+        printf("%d -> ", temp->data);
+        temp = temp->next;
+    } while (temp != head);
+    printf("(Back to Head %d)\n", head->data);
+}
+
+// Function to concatenate two circular linked lists
+Node* concatenate(Node* head1, Node* head2) {
+    if (!head1) return head2; // If first list is empty, return second
+    if (!head2) return head1; // If second list is empty, return first
+
+    // Find last node of first list
+    Node* tail1 = head1;
+    while (tail1->next != head1) {
+        tail1 = tail1->next;
+    }
+
+    // Find last node of second list
+    Node* tail2 = head2;
+    while (tail2->next != head2) {
+        tail2 = tail2->next;
+    }
+
+    // Connect last node of first list to head of second list
+    tail1->next = head2;
+
+    // Connect last node of second list to head of first list to maintain circularity
+    tail2->next = head1;
+
+    return head1; // Return the head of the concatenated list
+}
+
+// Main function
+int main() {
+    Node* head1 = NULL;
+    Node* head2 = NULL;
+
+    // Creating first circular linked list: 1 -> 2 -> 3
+    insert(&head1, 1);
+    insert(&head1, 2);
+    insert(&head1, 3);
+
+    // Creating second circular linked list: 4 -> 5 -> 6
+    insert(&head2, 4);
+    insert(&head2, 5);
+    insert(&head2, 6);
+
+    printf("First Circular Linked List: ");
+    printList(head1);
+
+    printf("Second Circular Linked List: ");
+    printList(head2);
+
+    // Concatenate the two circular linked lists
+    head1 = concatenate(head1, head2);
+
+    printf("Concatenated Circular Linked List: ");
+    printList(head1);
+
+    return 0;
+}
