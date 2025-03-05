@@ -1,0 +1,80 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+// Function to insert a new node at the end
+void insert(struct Node** head, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+        return;
+    }
+
+    struct Node* temp = *head;
+    while (temp->next != NULL) {
+        temp = temp->next;
+    }
+    temp->next = newNode;
+}
+
+// Function to remove duplicates from an unsorted linked list
+void removeDuplicates(struct Node* head) {
+    struct Node* current = head;
+    
+    while (current != NULL && current->next != NULL) {
+        struct Node* prev = current;
+        struct Node* temp = current->next;
+        
+        while (temp != NULL) {
+            if (current->data == temp->data) {
+                prev->next = temp->next;
+                free(temp);
+                temp = prev->next;
+            } else {
+                prev = temp;
+                temp = temp->next;
+            }
+        }
+        current = current->next;
+    }
+}
+
+// Function to print the linked list
+void printList(struct Node* head) {
+    while (head != NULL) {
+        printf("%d -> ", head->data);
+        head = head->next;
+    }
+    printf("NULL\n");
+}
+
+// Main function
+int main() {
+    struct Node* head = NULL;
+    
+    // Creating the list 12->11->12->21->41->43->21
+    insert(&head, 12);
+    insert(&head, 11);
+    insert(&head, 12);
+    insert(&head, 21);
+    insert(&head, 41);
+    insert(&head, 43);
+    insert(&head, 21);
+
+    printf("Original list:\n");
+    printList(head);
+
+    removeDuplicates(head);
+
+    printf("List after removing duplicates:\n");
+    printList(head);
+
+    return 0;
+}
