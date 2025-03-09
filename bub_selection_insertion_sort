@@ -1,0 +1,58 @@
+#include<stdio.h>
+#include<stdbool.h>
+ int arr[7]={1,2,6,7,8,9,3};
+    int n=7; 
+
+void bubblesort(){
+    for(int i=0;i<n-1;i++){
+        bool isswap=false;
+        for(int j=0;j<n-i-1;j++){
+            if(arr[j]>arr[j+1]){
+                int temp=arr[j];
+                arr[j]=arr[j+1];
+                arr[j+1]=temp;
+                 isswap=true;
+            }
+            }
+             if(!isswap){
+        return;
+    } 
+    }
+       
+    }
+    
+void selectionsort(){
+    for(int i=0;i<n-1;i++){
+        int si=i;
+ for(int j=i+1;j<n;j++){
+     if(arr[j]<arr[si]){
+     si=j;}
+ }
+     int temp=arr[i];
+                arr[i]=arr[si];
+                arr[si]=temp;
+ }
+    }
+
+void insertionsort(){
+    for(int i=1;i<n;i++){
+      int  temp=arr[i];
+      int j=i-1;
+      while(j>=0&&arr[j]>temp){
+          arr[j+1]=arr[j];
+          j--;
+      }
+      arr[j+1]=temp;
+    }
+}
+void printArray(){
+    for(int i = 0; i < n; i++){
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+int main(){
+  insertionsort();
+  printArray();
+  return 0;
+}
