@@ -1,0 +1,39 @@
+void linearsearch(){
+    int target=3;
+    for(int i=0;i<n;i++){
+        if(arr[i]==target){
+            printf("the target is acheived is %d\n",i);
+        }
+    }
+    return;
+}
+void binarysearch(){
+    int target=8;
+    int s=0;
+    int e=n-1;
+    while(s<=e){
+        int mid=(e+s)/2;
+        if(arr[mid]==target){
+            printf("target is achieved %d \n",mid);
+            return;
+        }
+else if(arr[mid]<target){
+    s=mid+1;
+  
+}
+else {
+    e=mid-1;
+   
+}
+    }
+    return;
+}
+int main(){
+  insertionsort();
+  printArray();
+  linearsearch();
+  printArray();
+  binarysearch();
+  printArray();
+  return 0;
+}
