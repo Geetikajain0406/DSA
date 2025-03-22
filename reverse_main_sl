@@ -1,0 +1,25 @@
+struct node*reverse(struct node *head){
+    struct node *temp=head;
+    struct node *prev=NULL;
+    while(temp!=NULL){
+        struct node*front=temp->link;
+        temp->link=prev;
+       prev=temp;
+       temp=front;
+    }
+    return prev;
+}
+int main(){
+    struct node*head;
+  head=malloc(sizeof(struct node));
+   head->data=5;
+    head->link=NULL;
+   add_at_beg(&head,4);
+   add_at_beg(&head,3);
+   add_at_beg(&head,2);
+   add_at_beg(&head,1);
+   print_data(head);
+   head=reverse(head);
+    print_data(head);
+   return 0;
+}
