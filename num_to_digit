@@ -1,0 +1,26 @@
+struct node*digit(struct node *head,int num){
+    if(num==0){
+        head=add_end(head,num);
+    }
+    while(num>0){
+        int digit=num%10;
+        head=add_end(head,digit);
+        num /=10;
+    }
+    return head;
+}
+
+int main (){
+   struct node*head =malloc(sizeof(struct node));
+   head -> data=1;
+   head->link =NULL;
+  
+   print(head);
+  int num;
+  printf("give the num\n");
+  scanf("%d",&num);
+  head=digit(head,num);
+  print(head);
+ 
+   return 0; 
+}
