@@ -1,0 +1,79 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+// Function to insert at end of Circular Linked List
+void insertAtEnd(struct Node** head, int value) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->next = *head;  
+
+    if (*head == NULL) {
+        *head = newNode;
+        newNode->next = *head;  // Circular link
+    } else {
+        struct Node* temp = *head;
+        while (temp->next != *head)
+            temp = temp->next;
+        temp->next = newNode;
+    }
+}
+
+void splitList(struct Node* head, struct Node** head1,struct Node** head2 ){
+    struct Node * fast=head;
+     struct Node * slow=head;
+     while(fast->next!= head && fast->next->next!=head){
+         slow=slow->next;
+         fast=fast->next->next;
+     }
+     *head1=head;
+     *head2=slow->next;
+     slow->next=*head1;
+     struct Node *temp=*head2;
+     while(temp->next!=head){
+         temp=temp->next;
+     }
+     temp->next=*head2;
+}
+void printList(struct Node* head) {
+    if (head == NULL) return;
+
+    struct Node* temp = head;
+    do {
+        printf("%d -> ", temp->data);
+        temp = temp->next;
+    } while (temp != head);
+    printf("(Back to Head)\n");
+}
+
+
+int main() {
+    struct Node* head = NULL;
+    struct Node* head1 = NULL;
+    struct Node* head2 = NULL;
+
+    // Creating Circular Linked List: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> (back to head)
+    insertAtEnd(&head, 1);
+    insertAtEnd(&head, 2);
+    insertAtEnd(&head, 3);
+    insertAtEnd(&head, 4);
+    insertAtEnd(&head, 5);
+    insertAtEnd(&head, 6);
+
+    printf("Original Circular Linked List:\n");
+    printList(head);
+
+    splitList(head, &head1, &head2);
+
+    printf("\nFirst Half:\n");
+    printList(head1);
+    
+    printf("\nSecond Half:\n");
+    printList(head2);
+
+    return 0;
+}
