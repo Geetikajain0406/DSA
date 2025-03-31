@@ -1,0 +1,11 @@
+list1=[0, 1, 9, 0, 5, 0, 4]
+list2=[]
+for num in list1:
+    if num >0:
+        list2.append(num)
+    
+for num in list1:
+    if num==0:
+        list2.append(num)
+
+print(list2)
