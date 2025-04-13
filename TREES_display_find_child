@@ -1,0 +1,56 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct node{
+    int data;
+    struct node* right;
+    struct node* left;
+};
+struct node *create(int data){
+    struct node*new=(struct node*)malloc(sizeof(struct node));
+    new->data=data;
+    new->right=NULL;
+    new->left=NULL;
+    return new;
+}
+void display(struct node*root){
+    if(root==NULL) return;
+    display(root->left);
+    display(root->right);
+    printf("%d \n",root->data);
+}
+void find_child(struct node* root,int data){
+    if(root==NULL) return;
+    if(root->data==data){
+        printf("the data  is %d \n",root->data);
+    if(root->left){
+        printf("the left child is %d\n",root->left->data);
+    }
+    else{
+        printf("none");
+    }
+    if(root->right){
+        printf("the right child is %d\n",root->right->data);
+    }
+    else{
+        printf("none");
+    }}
+    find_child(root->left,data);
+    find_child(root->right,data);
+}
+
+int main() {
+    struct node*root=(struct node*)malloc(sizeof(struct node));
+    root=create(20);
+    root->left=create(10);
+    root->right=create(15);
+    root->left->left=create(12);
+    root->left->right=create(18);
+    root->left->left->left=create(32);
+ root->left->left->right=create(4);
+  root->right->left=create(19);
+   root->right->right=create(25);
+   display(root);
+   find_child(root,10);
+    
+    return 0;
+}
