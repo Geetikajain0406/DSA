@@ -1,0 +1,122 @@
+#include <stdio.h>
+void bubblesort(int arr[],int n){
+    for(int i=0;i<n-1;i++){
+        for(int j=0;j<n-i-1;j++){
+            if(arr[j]>arr[j+1]){
+                int temp=arr[j];
+                arr[j]=arr[j+1];
+                arr[j+1]=temp;
+            }
+        }
+    }
+}
+void display(int arr[],int n){
+    for(int i=0;i<n;i++){
+        printf("%d",arr[i]);
+    }
+    printf("\n");
+}
+void selection(int arr[],int n){
+    for(int i=0;i<n-1;i++){
+        int si=i;
+        for(int j=i+1;j<n;j++){
+            if(arr[j]<arr[si]){
+                si=j;
+            }
+        }
+         int temp=arr[i];
+    arr[i]=arr[si];
+    arr[si]=temp;
+    }
+   
+}
+void insertion(int arr[],int n){
+    for(int i=0;i<n;i++){
+        int temp=arr[i];
+        int j=i-1;
+        while(j>0&&arr[j]>temp){
+            arr[j+1]=arr[j];
+            j--;
+        }
+        arr[j+1]=temp;
+    }
+}
+void conquer(int arr[],int si,int mid,int ei){
+    int merged[ei-si+1];
+    int idx1=si;
+    int idx2=mid+1;
+    int x=0;
+    while(idx1<=mid&& idx2<=ei){
+        if(arr[idx1]<arr[idx2]){
+        merged[x++]=arr[idx1++];
+    }
+    else{
+        merged[x++]=arr[idx2++];
+    }
+    while(idx1<=mid){
+         merged[x++]=arr[idx1++];
+    }
+    while(idx2<=ei){
+         merged[x++]=arr[idx2++];
+    }
+    }
+    for(int i=0,j=si;i<x;j++,i++){
+        arr[j]=merged[i];
+    }
+}
+void divide(int arr[],int si,int ei){
+    
+    if(si>=ei){return;}
+    int mid=si+(ei-si)/2;
+    divide(arr,si,mid);
+    divide(arr,mid+1,ei);
+    conquer(arr,si,mid,ei);
+}
+
+void binarysearch(int arr[],int n,int target){
+   int si=0;
+    int ei=n-1;
+    while(si<=ei){
+      int mid=(si+ei)/2;
+      if(arr[mid]==target){
+          printf(" %d\n",mid);
+          return;
+      }
+      else if(arr[mid]<target){
+          si=mid+1;
+      }
+      else{
+          ei=mid-1;
+      }
+    }
+}
+void linearsearch(int arr[],int n,int target){
+    for(int i=0;i<n;i++){
+        if(arr[i]==target){
+            printf("the target is met at %d\n",i);
+        }
+    }
+}
+int main() {
+      int n=5;
+   int arr[5]={5,4,3,2,1};
+   int arr2[5]={1,2,3,4,5};
+ 
+   int si=0;
+    int ei=n-1;
+   bubblesort(arr,n);
+   display(arr,n);
+   selection(arr,n);
+    display(arr,n);
+   insertion(arr,n);
+    display(arr,n);
+    
+    binarysearch(arr2,n,4);
+     display(arr,n);
+     linearsearch(arr2,n,3);
+      display(arr,n);
+      divide(arr,si,ei);
+      display(arr,n);
+    
+    return 0;
+}
