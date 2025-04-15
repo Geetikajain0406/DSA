@@ -1,0 +1,66 @@
+#include<stdio.h>
+
+void selectionsort(int arr[],int n){
+for(int i=0;i<n-1;i++){
+        int si=i;
+for(int j=i+1;j<n;j++){
+    if(arr[si]>arr[j]){
+    si=j;
+    }
+}
+int temp=arr[i];
+arr[i]=arr[si];
+arr[si]=temp;
+}
+}
+int binarysearch(int arr[],int n,int target){
+int si=1;
+int ei=n-1;
+
+while(si<=ei){
+int mid=(si+ei)/2;
+if(arr[mid]==target){
+    return mid;
+
+}
+else if(arr[mid]<target){
+    si=mid+1;
+}
+else{
+    ei=mid-1;
+}
+}
+return -1;
+}
+
+void print(int arr[],int n){
+printf("the array is\n");
+for(int i=0;i<n;i++){
+printf("%d",arr[i]);
+}
+printf("\n");
+}
+
+int main(){
+    int n;
+
+    printf("how much weights in array\n");
+    scanf("%d",&n);
+     int arr[n];
+printf(" enter elements in array\n");
+for(int i=0;i<n;i++){
+    scanf("%d",&arr[i]);
+}
+selectionsort(arr,n);
+print(arr,n);
+int k;
+printf("search value\n");
+    scanf("%d",&k);
+int found=binarysearch(arr,n,k);
+if(found){
+    printf("found %d\n",found);
+}
+
+
+
+return 0;}
