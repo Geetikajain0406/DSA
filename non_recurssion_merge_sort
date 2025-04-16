@@ -1,0 +1,60 @@
+#include <stdio.h>
+void mergesort(int arr[],int left,int mid,int right){
+   int l[6];
+    int r[6];
+    int n1=mid-left+1;
+    int n2=right-mid;
+    for(int i=0;i<n1;i++){
+        l[i]=arr[left+i];
+    }
+    for(int j=0;j<n2;j++){
+        r[j]=arr[mid+1+j];
+    }
+   int i=0,j=0, k=left;
+    while(i<n1&&j<n2){
+        if(l[i]<r[j]){
+            arr[k++]=l[i++];
+        }
+        else{
+            arr[k++]=r[j++];
+        }
+    }
+    while(i<n1){
+          arr[k++]=l[i++];
+    }
+      while(j<n2){
+          arr[k++]=r[j++];
+    }
+}
+void sort(int arr[],int n){
+    int size=1;
+    while(size<n){
+        int left=0;
+        while(left<n){
+            int mid=left+size-1;
+            int right=left+2*size-1;
+            if(mid>=n)break;
+            if(right>=n)right=n-1;
+            mergesort(arr,left,mid,right);
+            left=left+2*size;
+        }
+        size=size*2;
+    }
+}
+void print(int arr[],int n){
+    for(int i=0;i<n;i++){
+        printf("%d",arr[i]);
+    }
+    printf("\n");
+}
+int main() {
+    int arr[5]={5,4,3,2,1};
+    int n=5;
+     int left=0;
+      int right=n-1;
+    int mid=(left+right)/2;
+   sort(arr,n);
+    print(arr,n);
+
+    return 0;
+}
