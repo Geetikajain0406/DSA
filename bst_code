@@ -1,0 +1,51 @@
+ #include <stdio.h>
+#include<stdlib.h>
+struct node{
+    int data;
+    struct node*right;
+    struct node * left;
+};
+
+
+struct node *createnode(int data){
+    struct node*new1=malloc(sizeof(struct node));
+    new1->right=NULL;
+    new1->left=NULL;
+    new1->data=data;
+    return new1;
+}
+void displayin(struct node * root){
+     if (root != NULL){
+    displayin(root->left);
+    printf("%d \n",root->data);
+    displayin(root->right);
+     }
+}
+void displaypre(struct node * root){
+     if (root != NULL){
+    printf("%d \n",root->data);
+    displaypre(root->left);
+    displaypre(root->right);
+     }
+}
+void displaypost(struct node * root){
+     if (root != NULL){
+    displaypost(root->left);
+    displaypost(root->right);
+     printf("%d \n",root->data);
+     }
+}
+
+int main() {
+struct node * root=createnode(9);
+root->left=createnode(7);
+root->right=createnode(10);
+root->left->left=createnode(5);
+root->left->left->left=createnode(2);
+root->left->left->right=createnode(6);
+root->left->right=createnode(8);
+root->right->right=createnode(12);
+root->right->right->right=createnode(15);
+displayin(root);
+    return 0;
+}
