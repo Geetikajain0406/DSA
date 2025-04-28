@@ -1,0 +1,56 @@
+#include <stdio.h>
+#define max 20
+void swap(int *a,int *b){
+    int temp=*a;
+    *a=*b;
+    *b=temp;
+}
+void heapify(int heap[],int n,int i){
+    int largest=i;
+    int left=2*i+1;
+    int right=2*i+2;
+    if(left<n && heap[left]>heap[largest]){
+        largest=left;
+    }
+     if(right<n && heap[right]>heap[largest]){
+        largest=right;
+    }
+    if(largest != i){
+        swap(&heap[i],&heap[largest]);
+        heapify(heap,n,largest);
+    }
+}
+void buildheap(int heap[],int n){
+    for(int i=n/2-1;i>=0;i--){
+       heapify(heap,n,i);
+    }
+}
+void merged(int merge[],int h1[],int h2[], int n1,int n2){
+    int i;
+    for(i=0;i<n1;i++){
+     merge[i]=h1[i];
+    }
+    for(int j=0;j<n2;j++){
+        merge[i]=h2[j];
+        i++;
+    }
+    buildheap(merge,n1+n2);
+}
+void print(int heap[],int n){
+    printf("merge two heaps are\n");
+    for(int i=0;i<n;i++){
+        printf("%d ",heap[i]);
+    }
+    printf("\n");
+}
+int main() {
+int h1[] = {40, 30, 20, 10}; 
+    int h2[] = {35, 33, 15};
+    int n1=4;
+    int n2=3;
+int merge[max];
+merged(merge,h1,h2,n1,n2);
+print(merge,n1+n2);
+
+    return 0;
+}
