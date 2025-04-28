@@ -1,0 +1,75 @@
+#include <stdio.h>
+#define max 20
+int heap[max];
+int size=0;
+int sorted[max];
+void swap(int *a,int *b){
+    int temp=*a;
+    *a=*b;
+    *b=temp;
+}
+void heapify(int heap[],int n,int i){
+    int small=i;
+    int left=2*i+1;
+    int right=2*i+2;
+    if(left<n && heap[left]<heap[small]){
+        small=left;
+    }
+     if(right<n && heap[right]<heap[small]){
+        small=right;
+    }
+    if(small != i){
+        swap(&heap[i],&heap[small]);
+        heapify(heap,n,small);
+    }
+}
+void insert(int value){
+    size++;
+    int i=size;
+    heap[i]=value;
+    while(i>1){
+        int parent=i/2;
+        if(heap[parent]>heap[i]){
+            swap(&heap[parent],&heap[i]);
+            i=parent;
+        }
+        else{
+           break;
+        }
+    }
+}
+int del(){
+    if(size==0)return -1;
+    int minvalue=heap[1];
+    heap[1]=heap[size];
+    size--;
+    heapify(heap,size,1);
+    return minvalue;
+}
+void heapsort(){
+     int original_size = size;
+    for(int i=1;i<=size;i++){
+        sorted[i]=del();
+    }
+}
+void print(){
+    printf("min heaps \n");
+    for(int i=1;i<=size;i++){
+        printf("%d ",heap[i]);
+    }
+    printf("\n");
+}
+int main() {
+int n,value;
+printf("number\n");
+scanf("%d",&n);
+printf("give the value\n");
+for(int i=0;i<n;i++){
+    scanf("%d",&value);
+    insert(value);
+}
+print(heap,size);
+heapsort();
+print(sorted,n);
+    return 0;
+}
