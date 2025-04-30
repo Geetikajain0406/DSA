@@ -1,0 +1,70 @@
+#include <stdio.h>
+#define size 10
+int hash[size];
+void init(){
+    for (int i = 0; i < size; i++) {
+        hash[i] = -1;
+    }
+}
+
+int hashidx(int value){
+    return value%size;
+}
+void insert(int value){
+    int idx=hashidx(value);
+    while(hash[idx]!=-1){
+    idx=(idx+1)%size;
+    }
+    hash[idx]=value;
+    printf("inserted %d at index %d\n",value,idx);
+}
+void get(int value){
+    int idx=hashidx(value);
+    int count =0;
+    while(hash[idx]!=-1&&count<size){
+        if(hash[idx]==value){
+            printf("%d found at index %d",value,idx);
+            return ;
+        }
+         idx=(idx+1)%size;
+         count++;
+    }
+     printf("%d not found\n", value);
+}
+void removeval(int value){
+    int idx=hashidx(value);
+    int count =0;
+    while(hash[idx]!=-1&&count<size){
+        if(hash[idx]==value){
+            hash[idx]==1;
+             printf("%d removed from index %d\n", value, idx);
+            return;
+        }
+        idx=(idx+1)%size;
+         count++;
+    }
+     printf("%d not found\n", value);
+}
+void display() {
+    printf("Hash Table:\n");
+    for (int i = 0; i < size; i++) {
+        printf("Index %d : %d\n", i, hash[i]);
+    }
+}
+int main() {
+    init();
+    
+    insert(5);
+    insert(15);
+    insert(25);
+
+    display();
+
+    get(15);
+    removeval(15);
+    get(15);
+
+    display();
+
+    return 0;
+}
