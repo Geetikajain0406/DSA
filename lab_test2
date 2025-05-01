@@ -1,0 +1,73 @@
+#include<stdio.h>
+#include<stdlib.h>
+int size=5;
+int heap[5];
+void swap(int *a,int *b){
+int temp=*a;
+*a=*b;
+*b=temp;}
+void heapify(int heap[],int n,int i){
+int largest=i;
+int left=2*i+1;
+int right=2*i+2;
+if(left>n && heap[left]>heap[largest]){
+    largest=left;
+}
+else if(right>n && heap[right]>heap[largest]){
+    largest=right;
+}
+while(largest !=i){
+    swap(&heap[i],&heap[largest]);
+    heapify(heap,n,largest);
+}
+
+}
+void insert(int value){
+size=size+1;
+int i=size;
+heap[i]=value;
+while(i>1){
+    int parent=i/2;
+    if(heap[parent]<heap[i]){
+        swap(&heap[parent],&heap[i]);
+        parent=i;
+    }
+    else{
+        break;
+    }
+}
+}
+int del(){
+int maxsize=heap[1];
+heap[1]=size;
+size--;
+heapify(heap,size,i);
+return minsize;}
+
+void heapsort(){
+    int sorted[5];
+for (int i=1;i<=size;i++){
+    sorted[i]=del();
+}
+
+}
+
+void display(){
+printf("the heap is\n");
+for(int i=1;i<=size;i++){
+    printf("%d",heap[i]);
+}
+    printf("\n")
+}
+int main(){
+    int n,value;
+    printf("enter size");
+    scanf("%d",&n);
+    printf("give value\n");
+    for(int i=0;i<n;i++){
+        scanf("%d",&value);
+        insert(value);
+    }
+    heapsort();
+    display();
+return 0;}
