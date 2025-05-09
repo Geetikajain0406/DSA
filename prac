@@ -1,0 +1,41 @@
+#include <stdio.h>
+#define max 20
+int heap[max];
+int size=0;
+void  swap(int *a,int *b){
+    int temp=*a;
+    *a=*b;
+    *b=temp;}
+void insert(int value){
+    size=size+1;
+    int i=size;
+    heap[i]=value;
+    while(i>1){
+        int parent=i/2;
+        if(heap[parent]<heap[i]){
+            swap(&heap[parent],&heap[i]);
+            i=parent;
+        }
+        else{
+            break;
+        }
+    }
+}
+void display(){
+    printf("the heap is\n");
+    for(int i=1;i<=size;i++){
+        printf("%d ",heap[i]);
+    }
+    printf("\n");
+}
+int main() {
+  int n=6;
+  int value;
+  printf("enter value\n");
+      for(int i=0;i<n;i++){
+          scanf("%d",&value);
+          insert(value);
+  }
+  display();
+    return 0;
+}
