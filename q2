@@ -1,0 +1,99 @@
+#include <stdio.h>
+#include<stdlib.h>
+struct node{
+    int data,height;
+    struct node*right;
+    struct node*left;
+};
+struct node*createnode(int value){
+    struct node*new1=malloc(sizeof(struct node));
+    new1->data=value;
+    new1->right=NULL;
+     new1->left=NULL;
+     new1->height=1;
+     return new1;
+}
+int getheight(struct node*root){
+    if(root==NULL){
+        return 0;
+    }
+    return root->height;
+}
+int max(int a,int b){
+    return (a>b)?a:b;
+}
+int balancefactor(struct node*root){
+     if(root==NULL){
+        return 0;
+    }
+    return getheight(root->left)-getheight(root->right);
+}
+struct node*rightrotation(struct node*y){
+    struct node*x=y->left;
+    struct node*t2=x->right;
+    x->right=y;
+    y->left=t2;
+    x->height=max(getheight(x->right),getheight(x->left))+1;
+    y->height=max(getheight(y->right),getheight(y->left))+1;
+    return x;
+}
+struct node*leftrotation(struct node*y){
+    struct node*x=y->right;
+    struct node*t2=x->left;
+    x->left=y;
+    y->right=t2;
+    x->height=max(getheight(x->right),getheight(x->left))+1;
+    y->height=max(getheight(y->right),getheight(y->left))+1;
+    return x;
+}
+struct node*insert(struct node*root,int key){
+    if(root== NULL){
+        return createnode(key);
+    }
+    if(key>root->data){
+        root->right=insert(root->right,key);
+    }
+    else if(key<root->data){
+        root->left=insert(root->left,key);
+    }
+    else{
+        return root;
+    }
+root->height=max(getheight(root->right),getheight(root->left))+1;
+int balance=balancefactor(root);
+if(balance>1&&key<root->left->data){
+   return rightrotation(root);
+}
+else if(balance<-1&&key>root->right->data){
+   return leftrotation(root);
+}
+else if(balance>1&&key>root->left->data){
+    root->left=leftrotation(root->left);
+   return rightrotation(root);
+}
+else if(balance<-1&&key<root->right->data){
+    root->right=rightrotation(root->right);
+   return leftrotation(root);
+}
+return root;
+}
+void inorder(struct node*root){
+    if (root == NULL) {
+        return;
+    }
+    inorder(root->left);
+    printf("%d ",root->data);
+    inorder(root->right);
+}
+int main() {
+struct node* root=NULL;
+root=insert(root,1);
+root=insert(root,2);
+root=insert(root,3);
+root=insert(root,4);
+root=insert(root,5);
+root=insert(root,6);
+inorder(root);
+
+    return 0;
+}
