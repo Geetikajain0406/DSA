@@ -1,0 +1,55 @@
+#include <stdio.h>
+#include <string.h> // for memset()
+
+void countSort(int arr[], int n) {
+    int output[n]; // Output array
+    int max = arr[0];
+
+    // Find the largest element in arr[]
+    for (int i = 1; i < n; i++) {
+        if (arr[i] > max)
+            max = arr[i];
+    }
+
+    int count[max + 1];
+    memset(count, 0, sizeof(count)); // Initialize all elements to 0
+
+    // Store the count of each element
+    for (int i = 0; i < n; i++) {
+        count[arr[i]]++;
+    }
+
+    // Store cumulative count
+    for (int i = 1; i <= max; i++) {
+        count[i] += count[i - 1];
+    }
+
+    // Build the output array (stable sort)
+    for (int i = n - 1; i >= 0; i--) {
+        output[count[arr[i]] - 1] = arr[i];
+        count[arr[i]]--;
+    }
+
+    // Copy the output array to arr[]
+    for (int i = 0; i < n; i++) {
+        arr[i] = output[i];
+    }
+}
+
+// Driver code
+int main() {
+    int arr[] = {4, 2, 2, 8, 3, 3, 1};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    printf("Original array: ");
+    for (int i = 0; i < n; i++)
+        printf("%d ", arr[i]);
+
+    countSort(arr, n);
+
+    printf("\nSorted array:   ");
+    for (int i = 0; i < n; i++)
+        printf("%d ", arr[i]);
+
+    return 0;
+}
