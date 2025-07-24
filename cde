@@ -1,0 +1,2 @@
+slow = head      # starts at 1
+fast = head      # starts at 1
